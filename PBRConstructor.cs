@@ -87,8 +87,10 @@ public class PBRConstructor : EditorWindow
             }
             
             // Combine and save packed map to texture
-            packedMap = CombineIntoPackedMap(metallicMap, AOMap, roughnessMap);
-            packedMap = SaveTexture(packedMap, textureOutputPath);
+            if (metallicMap != null || AOMap != null || roughnessMap != null) {
+                packedMap = CombineIntoPackedMap(metallicMap, AOMap, roughnessMap);
+                packedMap = SaveTexture(packedMap, textureOutputPath);      
+            }
 
             // Configure normal map (if it exists)
             TextureImporter importer = AssetImporter.GetAtPath(AssetDatabase.GetAssetPath(normalMap)) as TextureImporter;
